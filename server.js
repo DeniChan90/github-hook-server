@@ -33,7 +33,7 @@ webhookHandler.on('*', (event, repo, data) => {
 
     axios({
       method: 'post',
-      url: `${data.issue_url}/comments`,
+      url: `${data.pull_request.issue_url}/comments`,
       headers: {
         Authorization: 'token 15d247a2311494adf0f2c55518e7d9668f57c0db',
         // Authorization: `Bearer ${jwt}`,
