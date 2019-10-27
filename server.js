@@ -4,12 +4,12 @@ const axios = require('axios');
 const GithubWebHook = require('express-github-webhook');
 const bodyParser = require('body-parser');
 const shell = require('shelljs');
-const { App } = require("@octokit/app");
+// const { App } = require("@octokit/app");
 // const Octokit = require('@octokit/rest');
 
-const APP_ID = '44821';
-const CLIENT_ID = 'Iv1.7dedba7c70dc0d78';
-const PRIVATE_KEY = fs.readFileSync('./webhook-app-dc.private-key.pem');
+// const APP_ID = '44821';
+// const CLIENT_ID = 'Iv1.7dedba7c70dc0d78';
+// const PRIVATE_KEY = fs.readFileSync('./webhook-app-dc.private-key.pem');
 
 const server = express();
 const port = process.env.PORT || 8000;
@@ -23,9 +23,6 @@ server.use(bodyParser.json());
 server.use(webhookHandler);
 
 webhookHandler.on('*', (event, repo, data) => {
-
-  console.log('pul request -> ', data);
-  
   shell.exec('git config --global user.name "DC_test"')
   shell.exec('git clone https://github.com/DeniChan90/Github-hook.git');
   shell.cd('./Github-hook');
@@ -35,9 +32,9 @@ webhookHandler.on('*', (event, repo, data) => {
       method: 'post',
       url: `${data.pull_request.issue_url}/comments`,
       headers: {
-        //Authorization: 'token 15d247a2311494adf0f2c55518e7d9668f57c0db',
-        Authorization: `Bearer ${jwt}`,
-        Accept: 'application/vnd.github.machine-man-preview+json'
+        Authorization: 'token ', // INSERT YOUR TOKEN HERE
+        // Authorization: `Bearer ${jwt}`,
+        // Accept: 'application/vnd.github.machine-man-preview+json'
       },
       data : {
         body: '```' + stdout + '```'
