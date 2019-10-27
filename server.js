@@ -22,7 +22,7 @@ const webhookHandler = GithubWebHook({ path: '/', secret: 'qwerty123' });
 server.use(bodyParser.json());
 server.use(webhookHandler);
 
-webhookHandler.on('pull_request', (event, repo, data) => {
+webhookHandler.on('*', (event, repo, data) => {
 
   console.log('pul request -> ', data);
   
