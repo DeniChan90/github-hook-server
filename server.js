@@ -24,7 +24,7 @@ server.use(webhookHandler);
 
 webhookHandler.on('pull_request', (event, repo, data) => {
 
-
+  console.log('pul request -> ', data);
   shell.exec('git clone git@github.com:DeniChan90/Github-hook.git');
   shell.cd('./Github-hook');
   shell.exec('openapi validate openapi.yaml', (code, stdout, stderr) => {
@@ -48,7 +48,7 @@ webhookHandler.on('pull_request', (event, repo, data) => {
     });
 
   });
-  shell.cd('./Github-hook');
+  shell.cd('../Github-hook');
   shell.exec('rm -rf Github-hook');
 
 });
