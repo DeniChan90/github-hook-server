@@ -40,7 +40,7 @@ webhookHandler.on('*', (event, repo, data) => {
         // Accept: 'application/vnd.github.machine-man-preview+json'
       },
       data : {
-        body: stdout
+        body: '```' + stdout + '```'
       }
     }).then((res) => {
       console.log('response ... ', res);
