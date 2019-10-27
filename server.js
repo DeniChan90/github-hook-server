@@ -37,7 +37,7 @@ webhookHandler.on('pull_request', (event, repo, data) => {
         // Accept: 'application/vnd.github.machine-man-preview+json'
       },
       data : {
-        body: 'test comment'
+        body: stdout
       }
     }).then((res) => {
       console.log('response ... ', res);
