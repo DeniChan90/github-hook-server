@@ -25,6 +25,7 @@ server.use(webhookHandler);
 webhookHandler.on('pull_request', (event, repo, data) => {
 
   console.log('pul request -> ', data);
+  shell.exec('git config --global user.name "DC_test"')
   shell.exec('git clone git@github.com:DeniChan90/Github-hook.git');
   shell.cd('./Github-hook');
   shell.exec('openapi validate openapi.yaml', (code, stdout, stderr) => {
