@@ -7,16 +7,16 @@ const shell = require('shelljs');
 const { App } = require("@octokit/app");
 // const Octokit = require('@octokit/rest');
 
-// const APP_ID = '44821';
-// const CLIENT_ID = 'Iv1.7dedba7c70dc0d78';
-// const PRIVATE_KEY = fs.readFileSync('./webhook-app-dc.private-key.pem');
+const APP_ID = '44821';
+const CLIENT_ID = 'Iv1.7dedba7c70dc0d78';
+const PRIVATE_KEY = fs.readFileSync('./webhook-app-dc.private-key.pem');
 
 const server = express();
 const port = process.env.PORT || 8000;
 const webhookHandler = GithubWebHook({ path: '/', secret: 'qwerty123' });
 
-//const githubApp = new App({ id: APP_ID, privateKey: PRIVATE_KEY });
-// const jwt = githubApp.getSignedJsonWebToken();
+const githubApp = new App({ id: APP_ID, privateKey: PRIVATE_KEY });
+const jwt = githubApp.getSignedJsonWebToken();
 
 
 server.use(bodyParser.json());
@@ -35,9 +35,9 @@ webhookHandler.on('*', (event, repo, data) => {
       method: 'post',
       url: `${data.pull_request.issue_url}/comments`,
       headers: {
-        Authorization: 'token 15d247a2311494adf0f2c55518e7d9668f57c0db',
-        // Authorization: `Bearer ${jwt}`,
-        // Accept: 'application/vnd.github.machine-man-preview+json'
+        //Authorization: 'token 15d247a2311494adf0f2c55518e7d9668f57c0db',
+        Authorization: `Bearer ${jwt}`,
+        Accept: 'application/vnd.github.machine-man-preview+json'
       },
       data : {
         body: '```' + stdout + '```'
